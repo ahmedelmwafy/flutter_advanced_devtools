@@ -1,3 +1,7 @@
+## 1.0.2
+* Added localization support (English and Arabic).
+* Added missing localizations for new keys.
+
 ## 1.0.1
 
 * Fixed the issue with the floating button not being visible.
