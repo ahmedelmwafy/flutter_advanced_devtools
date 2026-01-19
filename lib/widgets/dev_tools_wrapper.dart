@@ -259,6 +259,7 @@ class DevToolsShareUtils {
 
   /// Share text via system share sheet
   static Future<void> shareText(String text, {String? subject}) async {
+    // ignore: deprecated_member_use
     await Share.share(text, subject: subject);
   }
 

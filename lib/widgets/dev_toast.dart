@@ -3,10 +3,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_devtools/ui_event_logger.dart';
 
+/// A utility class for displaying toast notifications within the app.
+///
+/// Use [DevToast.show] for custom toasts or convenience methods like [success], [error], [warning], and [info].
 class DevToast {
   static OverlayEntry? _currentToast;
   static final UIEventLogger _logger = UIEventLogger();
 
+  /// Shows a customizable toast notification.
+  ///
+  /// [context] - The build context.
+  /// [message] - The text message to display.
+  /// [duration] - How long the toast should be visible. Defaults to 2 seconds.
+  /// [backgroundColor] - Custom background color.
+  /// [textColor] - Custom text color.
+  /// [icon] - Optional icon to display.
+  /// [metadata] - Optional metadata logger.
   static void show(
     BuildContext context,
     String message, {
@@ -41,6 +53,7 @@ class DevToast {
     });
   }
 
+  /// Shows a success toast (green background with check icon).
   static void success(BuildContext context, String message) {
     show(
       context,
@@ -51,6 +64,7 @@ class DevToast {
     );
   }
 
+  /// Shows an error toast (red background with error icon).
   static void error(BuildContext context, String message) {
     show(
       context,
@@ -62,6 +76,7 @@ class DevToast {
     );
   }
 
+  /// Shows a warning toast (orange background with warning icon).
   static void warning(BuildContext context, String message) {
     show(
       context,
@@ -72,6 +87,7 @@ class DevToast {
     );
   }
 
+  /// Shows an info toast (blue background with info icon).
   static void info(BuildContext context, String message) {
     show(
       context,
@@ -152,7 +168,7 @@ class _ToastWidgetState extends State<_ToastWidget>
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
+                    color: Colors.black.withValues(alpha: 0.2),
                     blurRadius: 10,
                     offset: const Offset(0, 4),
                   ),

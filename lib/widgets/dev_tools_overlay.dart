@@ -891,7 +891,7 @@ Build: ${_packageInfo?.buildNumber ?? 'N/A'}
                     vertical: 5,
                   ),
                   decoration: BoxDecoration(
-                    color: _getPermissionColor(status).withOpacity(0.1),
+                    color: _getPermissionColor(status).withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(6),
                     border: Border.all(
                       color: _getPermissionColor(status),
@@ -1276,6 +1276,7 @@ Build: ${_packageInfo?.buildNumber ?? 'N/A'}
                 TextButton.icon(
                   onPressed: () {
                     final data = _uiEventLogger.exportAll();
+                    // ignore: deprecated_member_use
                     Share.share(data, subject: 'UI Events Export');
                   },
                   icon: const Icon(Icons.share, size: 18),
@@ -1326,7 +1327,7 @@ Build: ${_packageInfo?.buildNumber ?? 'N/A'}
         width: 40,
         height: 40,
         decoration: BoxDecoration(
-          color: _getEventColor(event.type).withOpacity(0.1),
+          color: _getEventColor(event.type).withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(8),
         ),
         child: Center(
@@ -1737,7 +1738,7 @@ Build: ${_packageInfo?.buildNumber ?? 'N/A'}
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: isSelected
-              ? _config.theme.primaryColor.withOpacity(0.1)
+              ? _config.theme.primaryColor.withValues(alpha: 0.1)
               : Colors.grey.shade50,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
@@ -1949,7 +1950,7 @@ Build: ${_packageInfo?.buildNumber ?? 'N/A'}
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
               decoration: BoxDecoration(
-                color: _getMethodColor(entry.method).withOpacity(0.15),
+                color: _getMethodColor(entry.method).withValues(alpha: 0.15),
                 borderRadius: BorderRadius.circular(4),
               ),
               child: Text(
@@ -2067,6 +2068,7 @@ ${entry.requestBody ?? 'None'}
 Response:
 ${entry.responseBody ?? 'None'}
 ''';
+    // ignore: deprecated_member_use
     Share.share(
       text,
       subject: 'Network Log - ${entry.method} ${Uri.parse(entry.url).path}',
@@ -2083,6 +2085,7 @@ ${entry.responseBody ?? 'None'}
       );
       buffer.writeln();
     }
+    // ignore: deprecated_member_use
     Share.share(buffer.toString(), subject: 'FittPub Network Logs');
   }
 
@@ -2308,6 +2311,7 @@ ${entry.responseBody ?? 'None'}
       child: GestureDetector(
         onTap: () async {
           await DevToolsPreferences.init(); // Ensure prefs initialized
+          if (!mounted) return;
           // Locale logic would need abstraction or rely on app context helper
           // For now, assuming standard usage or leaving it to user
           // await CachedHelper.setLang(code);
@@ -2598,7 +2602,8 @@ class _RequestDetailSheet extends StatelessWidget {
                     vertical: 4,
                   ),
                   decoration: BoxDecoration(
-                    color: _getMethodColor(entry.method).withOpacity(0.15),
+                    color:
+                        _getMethodColor(entry.method).withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(
