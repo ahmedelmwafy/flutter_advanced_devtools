@@ -1,7 +1,8 @@
-## 1.0.0
+## 1.0.1
 
-* Initial release of Flutter Advanced DevTools.
-* Features:
+* Fixed the issue with the floating button not being visible.
+* Added new tabs for Firebase debugging tools, UI event logging, and performance monitoring.
+* Added new features:
   * Network logging with Dio interceptors.
   * Environment management (switch between Dev, Staging, Prod).
   * Device information display.
