@@ -1,6 +1,6 @@
 name: flutter_advanced_devtools
 description: "A comprehensive, production-ready developer tools package for Flutter apps with customizable theming, network logging, performance monitoring, and more."
-version: 1.0.2
+version: 1.0.3
 homepage: https://github.com/ahmedelmwafy/flutter_advanced_devtools
 repository: https://github.com/ahmedelmwafy/flutter_advanced_devtools
 

@@ -198,5 +198,6 @@
     "dev_tools_gc_triggered": "تم تفعيل جمع القمامة",
     "dev_tools_clear_image_cache": "مسح ذاكرة الصور",
     "dev_tools_image_cache_cleared": "تم مسح ذاكرة الصور",
-    "dev_tools_close": "إغلاق"
+    "dev_tools_close": "إغلاق",
+    "dev_tools_copied_to_clipboard": "تم النسخ إلى الحافظة"
 }

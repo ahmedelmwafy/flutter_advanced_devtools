@@ -198,5 +198,6 @@
     "dev_tools_gc_triggered": "Garbage collection triggered",
     "dev_tools_clear_image_cache": "Clear Image Cache",
     "dev_tools_image_cache_cleared": "Image cache cleared",
-    "dev_tools_close": "Close"
+    "dev_tools_close": "Close",
+    "dev_tools_copied_to_clipboard": "Copied to clipboard"
 }

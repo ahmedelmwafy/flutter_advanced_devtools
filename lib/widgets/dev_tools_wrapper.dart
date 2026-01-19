@@ -1,5 +1,3 @@
-// lib/core/dev_tools/widgets/dev_tools_wrapper.dart
-
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
@@ -10,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sensors_plus/sensors_plus.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:localize_and_translate/localize_and_translate.dart';
 
 /// Global Dev Tools Wrapper - wrap your MaterialApp with this
 /// to enable dev tools globally with a floating button on all pages
@@ -245,7 +244,7 @@ class DevToolsShareUtils {
     if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text(successMessage ?? 'Copied to clipboard'),
+          content: Text(successMessage ?? 'dev_tools_copied_to_clipboard'.tr()),
           duration: const Duration(seconds: 2),
           backgroundColor: DevToolsConfig().theme.primaryColor,
           behavior: SnackBarBehavior.floating,

@@ -1,3 +1,6 @@
+## 1.0.3
+* Fixed remaining hardcoded strings.
+
 ## 1.0.2
 * Added localization support (English and Arabic).
 * Added missing localizations for new keys.
