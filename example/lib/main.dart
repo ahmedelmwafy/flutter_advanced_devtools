@@ -2,7 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_devtools/widgets/dev_tools_wrapper.dart';
 import 'package:flutter_advanced_devtools/widgets/dev_toast.dart';
 
-void main() {
+import 'package:flutter_advanced_devtools/dev_tools_config.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize DevTools with custom environments
+  await DevToolsConfig().init(
+    customEnvironments: [
+      const Environment(
+        name: 'Dev',
+        baseUrl: 'https://dev.api.com',
+        description: 'Development Environment',
+      ),
+      const Environment(
+        name: 'Prod',
+        baseUrl: 'https://prod.api.com',
+        description: 'Production Environment',
+        isProduction: true,
+      ),
+    ],
+  );
+
   runApp(const MyApp());
 }
 

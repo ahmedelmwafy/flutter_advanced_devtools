@@ -598,7 +598,7 @@ class _DevToolsOverlayState extends State<DevToolsOverlay> {
                         onPressed: () => Share.share(
                           _fcmToken!,
                           subject:
-                              '${'dev_tools_fcm_token'.tr()} - ${_packageInfo?.appName ?? 'FittPub'}',
+                              '${'dev_tools_fcm_token'.tr()} - ${_packageInfo?.appName ?? 'App Name'}',
                         ),
                         icon: const Icon(Icons.share, size: 16),
                         label: Text('dev_tools_share'.tr()),
@@ -799,7 +799,7 @@ class _DevToolsOverlayState extends State<DevToolsOverlay> {
                 child: ElevatedButton.icon(
                   onPressed: () {
                     final data = '''
-FittPub Storage Export
+Storage Export
 =======================
 Date: ${DateTime.now()}
 
@@ -812,7 +812,8 @@ Base URL: ${_config.currentBaseUrl}
 App Version: ${_packageInfo?.version ?? 'N/A'}
 Build: ${_packageInfo?.buildNumber ?? 'N/A'}
 ''';
-                    Share.share(data, subject: 'FittPub Storage Export');
+                    // ignore: deprecated_member_use
+                    Share.share(data, subject: 'Storage Export');
                   },
                   icon: const Icon(Icons.file_download),
                   label: Text('dev_tools_export_storage_info'.tr()),
@@ -1676,7 +1677,7 @@ Build: ${_packageInfo?.buildNumber ?? 'N/A'}
         _buildCard(
           title: 'dev_tools_select_environment'.tr(),
           child: Column(
-            children: DevToolsConfig.environments.map((env) {
+            children: _config.environments.map((env) {
               final isSelected = _config.currentEnvironmentName == env.name;
               return _buildEnvOption(env, isSelected);
             }).toList(),
@@ -1691,7 +1692,7 @@ Build: ${_packageInfo?.buildNumber ?? 'N/A'}
                 controller: _customUrlController,
                 style: const TextStyle(fontSize: 14),
                 decoration: InputDecoration(
-                  hintText: 'https://api.example.com',
+                  hintText: 'https://api.yourdomain.com',
                   hintStyle: TextStyle(color: Colors.grey.shade400),
                   filled: true,
                   fillColor: Colors.grey.shade50,
@@ -2076,7 +2077,7 @@ ${entry.responseBody ?? 'None'}
   }
 
   void _shareAllLogs(List<NetworkLogEntry> entries) {
-    final buffer = StringBuffer('FittPub Network Logs\n${'=' * 30}\n\n');
+    final buffer = StringBuffer('Network Logs\n${'=' * 30}\n\n');
     for (var i = 0; i < entries.length; i++) {
       final e = entries[i];
       buffer.writeln('[${i + 1}] ${e.method} ${e.url}');
@@ -2086,7 +2087,7 @@ ${entry.responseBody ?? 'None'}
       buffer.writeln();
     }
     // ignore: deprecated_member_use
-    Share.share(buffer.toString(), subject: 'FittPub Network Logs');
+    Share.share(buffer.toString(), subject: 'Network Logs');
   }
 
   Widget _buildSettingsContent() {

@@ -314,7 +314,7 @@ class DevToolsShareUtils {
   static String formatAllNetworkLogs(List<dynamic> logs) {
     final buffer = StringBuffer();
     buffer.writeln('╔═══════════════════════════════════════╗');
-    buffer.writeln('║     FITTPUB DEV TOOLS - NETWORK LOG    ║');
+    buffer.writeln('║     DEV TOOLS - NETWORK LOG    ║');
     buffer.writeln(
       '║     Exported: ${DateTime.now().toString().substring(0, 19)}     ║',
     );

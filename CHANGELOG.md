@@ -1,3 +1,7 @@
+## 1.0.4
+* Removed project-specific default URLs and branding.
+* Added support for custom environments initialization.
+
 ## 1.0.3
 * Fixed remaining hardcoded strings.
 

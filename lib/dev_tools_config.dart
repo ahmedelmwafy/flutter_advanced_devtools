@@ -46,33 +46,42 @@ class DevToolsConfig {
   static const String _networkAnalysisEnabledKey = 'dev_tools_network_analysis';
 
   /// Predefined environments
-  static const List<Environment> environments = [
-    Environment(
+  /// Configurable environments
+  List<Environment> _environments = [
+    const Environment(
       name: 'Development',
-      baseUrl: 'https://fittpub-dev.fittpub.sa/api/',
+      baseUrl: 'https://api.dev.example.com/',
       description: 'Development server for testing',
     ),
-    Environment(
+    const Environment(
       name: 'Staging',
-      baseUrl: 'https://fittpub-staging.fittpub.sa/api/',
+      baseUrl: 'https://api.staging.example.com/',
       description: 'Staging server for QA',
     ),
-    Environment(
+    const Environment(
       name: 'Production',
-      baseUrl: 'https://fittpub.fittpub.sa/api/',
+      baseUrl: 'https://api.example.com/',
       description: 'Live production server',
       isProduction: true,
     ),
   ];
 
+  List<Environment> get environments => _environments;
+
   /// Get default environment based on build mode
-  static Environment get defaultEnvironment {
+  Environment get defaultEnvironment {
     if (isRelease) {
       // In release mode, default to Production
-      return environments.firstWhere((e) => e.name == 'Production');
+      return _environments.firstWhere(
+        (e) => e.name == 'Production',
+        orElse: () => _environments.last,
+      );
     } else {
       // In debug/profile mode, default to Development
-      return environments.firstWhere((e) => e.name == 'Development');
+      return _environments.firstWhere(
+        (e) => e.name == 'Development',
+        orElse: () => _environments.first,
+      );
     }
   }
 
@@ -124,7 +133,7 @@ class DevToolsConfig {
   /// Get current environment object
   Environment? get currentEnvironment {
     try {
-      return environments.firstWhere((e) => e.name == currentEnvironmentName);
+      return _environments.firstWhere((e) => e.name == currentEnvironmentName);
     } catch (_) {
       return null;
     }
@@ -135,7 +144,13 @@ class DevToolsConfig {
   bool get isDevToolsEnabled => !isRelease;
 
   /// Initialize configuration from stored preferences
-  Future<void> init({Future<void> Function()? onReinitializeDio}) async {
+  Future<void> init({
+    Future<void> Function()? onReinitializeDio,
+    List<Environment>? customEnvironments,
+  }) async {
+    if (customEnvironments != null && customEnvironments.isNotEmpty) {
+      _environments = customEnvironments;
+    }
     if (onReinitializeDio != null) {
       this.onReinitializeDio = onReinitializeDio;
     }
@@ -173,7 +188,7 @@ class DevToolsConfig {
     await DevToolsPreferences.saveData(key: _baseUrlKey, value: url);
 
     // Try to match an environment
-    final matchedEnv = environments.where((e) => e.baseUrl == url).firstOrNull;
+    final matchedEnv = _environments.where((e) => e.baseUrl == url).firstOrNull;
     if (matchedEnv != null) {
       _currentEnvironmentName = matchedEnv.name;
       await DevToolsPreferences.saveData(
