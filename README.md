@@ -587,10 +587,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Support
 
-- 📧 Email: support@example.com
+- 📧 Email: ahmedelmwafy@gmail.com
 - 🐛 Issues: [GitHub Issues](https://github.com/ahmedelmwafy/flutter_advanced_devtools/issues)
-- 💬 Discussions: [GitHub Discussions](https://github.com/ahmedelmwafy/flutter_advanced_devtools/discussions)
-
 ---
 
 ## 🌟 Show Your Support

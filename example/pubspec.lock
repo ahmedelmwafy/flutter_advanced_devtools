@@ -98,7 +98,7 @@ packages:
     source: hosted
     version: "7.0.3"
   dio:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: dio
       sha256: d90ee57923d1828ac14e492ca49440f65477f4bb1263575900be731a3dac66a9
@@ -244,7 +244,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "1.0.0"
+    version: "1.0.5"
   flutter_lints:
     dependency: "direct dev"
     description:

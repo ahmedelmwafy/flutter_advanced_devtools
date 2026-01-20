@@ -3,6 +3,7 @@ description: "A comprehensive, production-ready developer tools package for Flut
 version: 1.0.5
 homepage: https://github.com/ahmedelmwafy/flutter_advanced_devtools
 repository: https://github.com/ahmedelmwafy/flutter_advanced_devtools
+issue_tracker: https://github.com/ahmedelmwafy/flutter_advanced_devtools/issues
 
 
 environment:
