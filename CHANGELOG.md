@@ -1,9 +1,12 @@
 ## 1.0.5
+* **Added 6 professional screenshots** showcasing all major features.
 * Added comprehensive documentation for pub.dev publication.
-* Added screenshot directory structure and preparation guide.
 * Refactored README with detailed Dio integration instructions.
-* Added helper scripts for screenshot optimization.
+* Added screenshot directory structure and preparation guide.
+* Added helper scripts for screenshot optimization and renaming.
+* Updated all GitHub URLs to correct repository.
 * Improved package documentation and examples.
+* **Ready for pub.dev publication.**
 
 ## 1.0.4
 * Removed project-specific default URLs and branding.
