@@ -96,10 +96,10 @@ class _MyHomePageState extends State<MyHomePage> {
     });
 
     // Log UI event manually
-    UIEventLogger().logEvent(
-      type: UIEventType.buttonTap,
-      message: 'Counter button tapped',
-      data: {'counter': _counter},
+    UIEventLogger().logAction(
+      'Counter button tapped',
+      details: 'Counter value: $_counter',
+      metadata: {'counter': _counter},
     );
 
     // Show success toast
@@ -121,22 +121,22 @@ class _MyHomePageState extends State<MyHomePage> {
         _isLoading = false;
       });
 
-      DevToast.success(context, 'API call successful! Check Network tab.');
+      if (mounted) {
+        DevToast.success(context, 'API call successful! Check Network tab.');
+      }
     } catch (e) {
       setState(() {
         _apiResponse = 'Error: $e';
         _isLoading = false;
       });
 
-      DevToast.error(
-          context, 'API call failed! Check Network tab for details.');
+      if (mounted) {
+        DevToast.error(
+            context, 'API call failed! Check Network tab for details.');
+      }
 
       // Log exception
-      ExceptionLogger().logException(
-        e,
-        StackTrace.current,
-        context: 'Network call failed',
-      );
+      ExceptionLogger().logException(e, StackTrace.current);
     }
   }
 
@@ -151,9 +151,13 @@ class _MyHomePageState extends State<MyHomePage> {
         DioHelper.dio.get('comments?postId=1'),
       ]);
 
-      DevToast.success(context, '3 API calls completed! Check Network tab.');
+      if (mounted) {
+        DevToast.success(context, '3 API calls completed! Check Network tab.');
+      }
     } catch (e) {
-      DevToast.error(context, 'Some API calls failed!');
+      if (mounted) {
+        DevToast.error(context, 'Some API calls failed!');
+      }
     }
   }
 
@@ -162,11 +166,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // Intentionally throw an error to demonstrate exception logging
       throw Exception('This is a test error to demonstrate exception logging!');
     } catch (e, stackTrace) {
-      ExceptionLogger().logException(
-        e,
-        stackTrace,
-        context: 'Test error from button click',
-      );
+      ExceptionLogger().logException(e, stackTrace);
 
       DevToast.error(context, 'Error triggered! Check Logs tab.');
     }
