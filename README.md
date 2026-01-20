@@ -11,15 +11,15 @@ A comprehensive, production-ready developer tools package for Flutter applicatio
 ## 📸 Screenshots
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/yourusername/flutter_advanced_devtools/main/assets/screenshots/main_screen.png" alt="Main Screen" width="250"/>
-  <img src="https://raw.githubusercontent.com/yourusername/flutter_advanced_devtools/main/assets/screenshots/network_logger.png" alt="Network Logger" width="250"/>
-  <img src="https://raw.githubusercontent.com/yourusername/flutter_advanced_devtools/main/assets/screenshots/performance_monitor.png" alt="Performance Monitor" width="250"/>
+  <img src="https://raw.githubusercontent.com/ahmedelmwafy/flutter_advanced_devtools/main/assets/screenshots/main_screen.png" alt="Main Screen" width="250"/>
+  <img src="https://raw.githubusercontent.com/ahmedelmwafy/flutter_advanced_devtools/main/assets/screenshots/network_logger.png" alt="Network Logger" width="250"/>
+  <img src="https://raw.githubusercontent.com/ahmedelmwafy/flutter_advanced_devtools/main/assets/screenshots/performance_monitor.png" alt="Performance Monitor" width="250"/>
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/yourusername/flutter_advanced_devtools/main/assets/screenshots/environment_switcher.png" alt="Environment Switcher" width="250"/>
-  <img src="https://raw.githubusercontent.com/yourusername/flutter_advanced_devtools/main/assets/screenshots/network_details.png" alt="Network Details" width="250"/>
-  <img src="https://raw.githubusercontent.com/yourusername/flutter_advanced_devtools/main/assets/screenshots/permissions.png" alt="Permissions" width="250"/>
+  <img src="https://raw.githubusercontent.com/ahmedelmwafy/flutter_advanced_devtools/main/assets/screenshots/environment_switcher.png" alt="Environment Switcher" width="250"/>
+  <img src="https://raw.githubusercontent.com/ahmedelmwafy/flutter_advanced_devtools/main/assets/screenshots/network_details.png" alt="Network Details" width="250"/>
+  <img src="https://raw.githubusercontent.com/ahmedelmwafy/flutter_advanced_devtools/main/assets/screenshots/permissions.png" alt="Permissions" width="250"/>
 </p>
 
 ---
@@ -588,8 +588,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Support
 
 - 📧 Email: support@example.com
-- 🐛 Issues: [GitHub Issues](https://github.com/yourusername/flutter_advanced_devtools/issues)
-- 💬 Discussions: [GitHub Discussions](https://github.com/yourusername/flutter_advanced_devtools/discussions)
+- 🐛 Issues: [GitHub Issues](https://github.com/ahmedelmwafy/flutter_advanced_devtools/issues)
+- 💬 Discussions: [GitHub Discussions](https://github.com/ahmedelmwafy/flutter_advanced_devtools/discussions)
 
 ---
 
