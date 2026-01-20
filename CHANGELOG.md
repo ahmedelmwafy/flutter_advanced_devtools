@@ -1,3 +1,10 @@
+## 1.0.5
+* Added comprehensive documentation for pub.dev publication.
+* Added screenshot directory structure and preparation guide.
+* Refactored README with detailed Dio integration instructions.
+* Added helper scripts for screenshot optimization.
+* Improved package documentation and examples.
+
 ## 1.0.4
 * Removed project-specific default URLs and branding.
 * Added support for custom environments initialization.

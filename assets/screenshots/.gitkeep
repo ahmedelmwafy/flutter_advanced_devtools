@@ -1,0 +1,12 @@
+# This file ensures the screenshots directory is tracked by git
+# Replace this file with your actual screenshots
+
+Please add your screenshots here:
+- main_screen.png
+- network_logger.png
+- network_details.png
+- performance_monitor.png
+- environment_switcher.png
+- permissions.png
+
+See SCREENSHOTS_GUIDE.md for instructions.

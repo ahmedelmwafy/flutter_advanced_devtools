@@ -1,72 +1,118 @@
-# FittPub Dev Tools
+# Flutter Advanced DevTools 🛠️
 
-A comprehensive, production-ready developer tools package for Flutter apps with customizable theming.
+[![pub package](https://img.shields.io/badge/pub-v0.1.0-blue)](https://pub.dev/packages/flutter_advanced_devtools)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Flutter](https://img.shields.io/badge/Flutter-%3E%3D3.0.0-02569B?logo=flutter)](https://flutter.dev)
 
-## Features
+A comprehensive, production-ready developer tools package for Flutter applications. Boost your development workflow with powerful debugging, network monitoring, performance tracking, and customizable theming.
 
-🎨 **Customizable Theme** - Match your app's branding  
-👤 **User Info** - Auth status, tokens, device info  
-🌐 **Environment Switcher** - Dev/Staging/Production  
-📡 **Network Logger** - Request/response tracking  
-🔔 **Push Notifications** - FCM testing & debugging  
-💾 **Storage Inspector** - View cached data  
-🔐 **Permissions** - Check & request permissions  
-⚡ **Performance Monitor** - CPU, RAM, FPS tracking  
-📢 **UI Events** - Toast/dialog/alert logger  
-⚠️ **Exception Logger** - Catch & view errors  
-⚙️ **Settings** - Hot reload, debug paint, & more
+---
 
-## Installation
+## 📸 Screenshots
 
-### As a Local Package
+<p align="center">
+  <img src="https://raw.githubusercontent.com/yourusername/flutter_advanced_devtools/main/assets/screenshots/main_screen.png" alt="Main Screen" width="250"/>
+  <img src="https://raw.githubusercontent.com/yourusername/flutter_advanced_devtools/main/assets/screenshots/network_logger.png" alt="Network Logger" width="250"/>
+  <img src="https://raw.githubusercontent.com/yourusername/flutter_advanced_devtools/main/assets/screenshots/performance_monitor.png" alt="Performance Monitor" width="250"/>
+</p>
 
-1. Copy the `dev_tools` folder to your project:
+<p align="center">
+  <img src="https://raw.githubusercontent.com/yourusername/flutter_advanced_devtools/main/assets/screenshots/environment_switcher.png" alt="Environment Switcher" width="250"/>
+  <img src="https://raw.githubusercontent.com/yourusername/flutter_advanced_devtools/main/assets/screenshots/network_details.png" alt="Network Details" width="250"/>
+  <img src="https://raw.githubusercontent.com/yourusername/flutter_advanced_devtools/main/assets/screenshots/permissions.png" alt="Permissions" width="250"/>
+</p>
+
+---
+
+
+## ✨ Features
+
+| Feature | Description |
+|---------|-------------|
+| 🎨 **Customizable Theme** | Match your app's branding with preset or custom themes |
+| 🌐 **Environment Switcher** | Switch between Dev/Staging/Production environments on-the-fly |
+| 📡 **Network Logger** | Full HTTP request/response tracking with Dio integration |
+| 👤 **User Info** | View auth tokens, user data, and device information |
+| ⚡ **Performance Monitor** | Real-time CPU, RAM, and FPS tracking |
+| 🔔 **Push Notifications** | Test and debug Firebase Cloud Messaging |
+| 💾 **Storage Inspector** | Browse and inspect cached/stored data |
+| 🔐 **Permissions Manager** | Check and request app permissions |
+| 📢 **UI Event Logger** | Track toasts, dialogs, and user interactions |
+| ⚠️ **Exception Logger** | Catch and view runtime errors |
+| ⚙️ **Debug Settings** | Hot reload, debug paint, performance overlay & more |
+
+---
+
+## 📦 Installation
+
+Add this to your package's `pubspec.yaml` file:
+
+```yaml
+dependencies:
+  flutter_advanced_devtools: ^0.1.0
 ```
-your_project/
-  lib/
-    core/
-      dev_tools/  ← Copy this folder
+
+Then run:
+
+```bash
+flutter pub get
 ```
 
-2. Import in your main.dart:
+---
+
+## 🚀 Quick Start
+
+### 1. Basic Setup
+
 ```dart
-import 'package:your_app/core/dev_tools/dev_tools_wrapper.dart';
-import 'package:your_app/core/dev_tools/dev_tools_config.dart';
-import 'package:your_app/core/dev_tools/dev_tools_theme.dart';
-```
+import 'package:flutter/material.dart';
+import 'package:flutter_advanced_devtools/flutter_advanced_devtools.dart';
 
-## Usage
-
-### Basic Setup
-
-Wrap your `MaterialApp` with `DevToolsWrapper`:
-
-```dart
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Initialize dev tools config
-  await DevToolsConfig().init();
+  // Initialize DevTools with your custom environments
+  await DevToolsConfig().init(
+    customEnvironments: [
+      const Environment(
+        name: 'Development',
+        baseUrl: 'https://api.dev.yourapp.com/',
+        description: 'Development server',
+      ),
+      const Environment(
+        name: 'Staging',
+        baseUrl: 'https://api.staging.yourapp.com/',
+        description: 'Staging server for QA',
+      ),
+      const Environment(
+        name: 'Production',
+        baseUrl: 'https://api.yourapp.com/',
+        description: 'Production server',
+        isProduction: true,
+      ),
+    ],
+  );
   
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return DevToolsWrapper(
       child: MaterialApp(
         title: 'My App',
-        home: HomePage(),
+        theme: ThemeData(primarySwatch: Colors.blue),
+        home: const HomePage(),
       ),
     );
   }
 }
 ```
 
-### Custom Theme
-
-#### Option 1: Use Preset Themes
+### 2. Customize Theme (Optional)
 
 ```dart
 void main() async {
@@ -75,224 +121,482 @@ void main() async {
   final config = DevToolsConfig();
   await config.init();
   
-  // Choose from preset themes
-  config.setTheme(DevToolsTheme.material());  // Blue (default)
-  config.setTheme(DevToolsTheme.green());     // Green
-  config.setTheme(DevToolsTheme.orange());    // Orange
-  config.setTheme(DevToolsTheme.purple());    // Purple
-  config.setTheme(DevToolsTheme.red());       // Red
-  config.setTheme(DevToolsTheme.teal());      // Teal
-  config.setTheme(DevToolsTheme.dark());      // Dark mode
+  // Option 1: Use preset themes
+  config.setTheme(DevToolsTheme.purple());
   
-  runApp(const MyApp());
-}
-```
-
-#### Option 2: Match Your App Color
-
-```dart
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  // Option 2: Generate from your app color
+  config.setTheme(DevToolsTheme.fromAppColor(Color(0xFF6200EE)));
   
-  final config = DevToolsConfig();
-  await config.init();
-  
-  // Automatically generate theme from your app's primary color
-  config.setTheme(DevToolsTheme.fromAppColor(
-    Color(0xFF6200EE), // Your app's primary color
-  ));
-  
-  runApp(const MyApp());
-}
-```
-
-#### Option 3: Full Custom Theme
-
-```dart
-void main() async {
-  WidgetsFlutterBinding.ensure Initialized();
-  
-  final config = DevToolsConfig();
-  await config.init();
-  
-  // Create completely custom theme
+  // Option 3: Fully custom theme
   config.setTheme(DevToolsTheme(
     primaryColor: Color(0xFF1976D2),
     secondaryColor: Color(0xFF64B5F6),
     successColor: Color(0xFF4CAF50),
     warningColor: Color(0xFFFF9800),
     errorColor: Color(0xFFF44336),
-    backgroundColor: Colors.white,
-    textColor: Color(0xFF212121),
-    cardColor: Colors.white,
   ));
   
   runApp(const MyApp());
 }
 ```
 
-### Change Theme at Runtime
+---
+
+## 📡 Network Logger Integration with Dio
+
+The Network Logger automatically captures **ALL** HTTP requests/responses made through your Dio instance, regardless of where in your app they originate.
+
+### Step 1: Create Your Dio Helper
 
 ```dart
-// In your settings screen or anywhere in the app:
-DevToolsConfig().setTheme(DevToolsTheme.purple());
+import 'package:dio/dio.dart';
+import 'package:flutter_advanced_devtools/flutter_advanced_devtools.dart';
 
-// Or create your own theme picker:
-class ThemePicker extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ListTile(
-          title: Text('Blue Theme'),
-          onTap: () => DevToolsConfig().setTheme(DevToolsTheme.material()),
-        ),
-        ListTile(
-          title: Text('Green Theme'),
-          onTap: () => DevToolsConfig().setTheme(DevToolsTheme.green()),
-        ),
-        // ... more options
-      ],
-    );
+class DioHelper {
+  static late Dio dio;
+
+  static void init() {
+    dio = Dio(BaseOptions(
+      baseUrl: DevToolsConfig().currentBaseUrl,
+      connectTimeout: const Duration(seconds: 30),
+      receiveTimeout: const Duration(seconds: 30),
+      receiveDataWhenStatusError: true,
+    ));
+
+    // 🔥 Add NetworkLoggerInterceptor to capture all network activity
+    if (DevToolsConfig().isDioLoggerEnabled) {
+      dio.interceptors.add(NetworkLoggerInterceptor());
+    }
+
+    // Add other interceptors (auth, retry, etc.)
+    // dio.interceptors.add(AuthInterceptor());
+  }
+
+  static Future<void> reinitialize() async {
+    // Update base URL when environment changes
+    dio.options.baseUrl = DevToolsConfig().currentBaseUrl;
+    
+    // Re-add interceptors
+    dio.interceptors.clear();
+    if (DevToolsConfig().isDioLoggerEnabled) {
+      dio.interceptors.add(NetworkLoggerInterceptor());
+    }
   }
 }
 ```
 
-## How to Access Dev Tools
+### Step 2: Initialize in main.dart
 
-### Method 1: Shake Device
-Shake your device 3 times within 1 second to open dev tools.
+```dart
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // Initialize DevTools with reinitialize callback
+  await DevToolsConfig().init(
+    onReinitializeDio: DioHelper.reinitialize, // Called when settings change
+    customEnvironments: [
+      // Your environments...
+    ],
+  );
+  
+  // Initialize Dio with interceptor
+  DioHelper.init();
+  
+  runApp(const MyApp());
+}
+```
 
-### Method 2: Floating Button
-Tap the floating developer mode button (visible in debug builds).
+### Step 3: Make Requests Anywhere
+
+```dart
+// In your repositories, services, or anywhere in your app
+class UserRepository {
+  Future<List<User>> getUsers() async {
+    try {
+      final response = await DioHelper.dio.get('/users');
+      // ✅ This request is automatically logged in DevTools!
+      return (response.data as List)
+          .map((json) => User.fromJson(json))
+          .toList();
+    } catch (e) {
+      // ✅ Errors are also logged!
+      rethrow;
+    }
+  }
+
+  Future<User> createUser(Map<String, dynamic> data) async {
+    final response = await DioHelper.dio.post('/users', data: data);
+    // ✅ POST requests are logged with request/response bodies!
+    return User.fromJson(response.data);
+  }
+}
+```
+
+### What Gets Logged?
+
+The Network Logger captures:
+- ✅ **All HTTP methods** (GET, POST, PUT, DELETE, PATCH, etc.)
+- ✅ **Request details** (URL, headers, body)
+- ✅ **Response details** (status code, headers, body)
+- ✅ **Timing** (request duration in milliseconds)
+- ✅ **Errors** (network failures, timeouts, server errors)
+- ✅ **Request origin** (doesn't matter where in your app it's called from!)
+
+### View Network Logs
+
+1. **Shake your device** 3 times (or tap the DevTools FAB)
+2. Navigate to the **"Network"** tab
+3. See all requests in real-time with:
+   - Method badges (GET, POST, etc.)
+   - Status codes with color coding
+   - Request/response times
+   - Full request/response inspection
+   - Copy/share functionality
+
+---
+
+## 🎯 How to Access DevTools
+
+### Method 1: Shake Gesture (Recommended)
+Shake your device **3 times within 1 second** to toggle DevTools.
+
+### Method 2: Floating Action Button
+Tap the floating developer button (visible in debug/profile builds).
 
 ### Method 3: Programmatic
 ```dart
-// You can also trigger it programmatically if needed
-// (Implementation depends on your state management)
+// Trigger from your code (useful for custom gestures)
+DevToolsService().toggleOverlay();
 ```
 
-## Features Details
+---
 
-### Environment Switching
-- **Development**: Testing server
-- **Staging**: QA server  
-- **Production**: Live server
-- **Custom**: Enter any base URL
+## 📖 Feature Details
 
-### Network Logging
-- View all HTTP requests/responses
-- Filter by method (GET, POST, etc.)
-- Copy URLs and responses
-- Export logs for sharing
-- Statistics dashboard
+### 🌐 Environment Switching
 
-### Performance Monitoring
-- **Memory**: Current & max usage (MB)
-- **CPU**: Estimated load (0-100%)
-- **FPS**: Average frame rate & dropped frames
-- Auto-updates every 2 seconds
-
-### UI Events
-Automatically logs:
-- Toasts
-- Dialogs
-- Alerts
-- SnackBars
-- User actions
-- Navigation events
-
-### Visual Debug Tools
-- **Debug Paint**: Show widget boundaries
-- **Performance Overlay**: FPS & GPU graphs
-- **Hot Reload**: Programmatic widget rebuild
-- **Image Cache**: Clear cached images
-- **Garbage Collection**: Force memory cleanup
-
-## Configuration
-
-### Disable in Release Builds
-
-Dev tools are automatically disabled in release builds. No code changes needed!
+Switch between environments in real-time without rebuilding:
 
 ```dart
-// This check happens automatically:
-bool get isDevToolsEnabled => !kReleaseMode;
+// Define environments during initialization
+await DevToolsConfig().init(
+  customEnvironments: [
+    Environment(
+      name: 'Local',
+      baseUrl: 'http://localhost:3000/',
+      description: 'Local development server',
+    ),
+    Environment(
+      name: 'Development',
+      baseUrl: 'https://api.dev.example.com/',
+      description: 'Remote dev server',
+    ),
+    Environment(
+      name: 'Production',
+      baseUrl: 'https://api.example.com/',
+      description: 'Live server',
+      isProduction: true,
+    ),
+  ],
+);
 ```
 
-### Custom Environments
+**Features:**
+- Switch environments from DevTools UI
+- Automatically reinitializes Dio with new base URL
+- Persists selection across app restarts
+- Custom environment support
+
+---
+
+### ⚡ Performance Monitoring
+
+Real-time performance metrics updated every 2 seconds:
+
+| Metric | Description |
+|--------|-------------|
+| **Memory** | Current RAM usage (MB) |
+| **CPU** | Estimated CPU load (0-100%) |
+| **FPS** | Frame rate & dropped frames |
 
 ```dart
-// Add your own environments:
-DevToolsConfig().setEnvironment(Environment(
-  name: 'My Custom Env',
-  baseUrl: 'https://my-server.com/api/',
-  description: 'My description',
-  isProduction: false,
+// Access performance data programmatically
+final stats = PerformanceMonitor().getCurrentStats();
+print('Memory: ${stats.memoryUsageMB} MB');
+print('CPU: ${stats.cpuUsage}%');
+print('FPS: ${stats.fps}');
+```
+
+---
+
+### 📢 UI Event Logger
+
+Automatically tracks user interactions:
+
+```dart
+import 'package:flutter_advanced_devtools/flutter_advanced_devtools.dart';
+
+// Manually log custom events
+UIEventLogger().logEvent(
+  type: UIEventType.custom,
+  message: 'User completed onboarding',
+  data: {'step': 3, 'time_spent': '2m 34s'},
+);
+```
+
+**Auto-logged events:**
+- Button taps
+- Navigation changes
+- Toasts/SnackBars
+- Dialog displays
+- Custom user actions
+
+---
+
+### ⚠️ Exception Logger
+
+Catch and view all runtime errors:
+
+```dart
+void main() async {
+  // Initialize exception handling
+  FlutterError.onError = (FlutterErrorDetails details) {
+    ExceptionLogger().logException(
+      details.exception,
+      details.stack,
+      context: 'Flutter Framework Error',
+    );
+  };
+
+  runZonedGuarded(() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await DevToolsConfig().init();
+    runApp(const MyApp());
+  }, (error, stack) {
+    ExceptionLogger().logException(error, stack, context: 'Async Error');
+  });
+}
+```
+
+---
+
+### 🔐 Permissions Manager
+
+View and request app permissions:
+
+```dart
+// The DevTools UI automatically shows:
+// - Camera, Location, Storage, Notifications, etc.
+// - Current permission status
+// - Request button for denied permissions
+```
+
+Requires `permission_handler` package (already included).
+
+---
+
+### 🔔 Firebase Debugging
+
+Test push notifications without external tools:
+
+1. View current FCM token
+2. Copy token for testing
+3. Check notification permissions
+4. View last notification payload
+5. Test local notifications
+
+---
+
+## ⚙️ Configuration
+
+### Build-Mode Behavior
+
+DevTools automatically adjusts based on build mode:
+
+| Build Mode | DevTools | Network Logger | Performance Monitor |
+|------------|----------|----------------|---------------------|
+| **Debug** | ✅ Enabled | ✅ Enabled | ✅ Enabled |
+| **Profile** | ✅ Enabled | ⚠️ Optional | ✅ Enabled |
+| **Release** | ❌ Disabled | ❌ Disabled | ❌ Disabled |
+
+No code changes needed! DevTools is **automatically disabled** in release builds.
+
+### Advanced Configuration
+
+```dart
+final config = DevToolsConfig();
+
+// Check current state
+print('Build Mode: ${DevToolsConfig.buildModeString}');
+print('Base URL: ${config.currentBaseUrl}');
+print('Logger Enabled: ${config.isDioLoggerEnabled}');
+print('Environment: ${config.currentEnvironmentName}');
+
+// Toggle features
+await config.setDioLoggerEnabled(false);
+await config.setNetworkAnalysisEnabled(true);
+
+// Reset to defaults
+await config.resetToDefault();
+
+// Get environment info
+final info = config.getEnvironmentInfo();
+```
+
+---
+
+## 🌍 Localization
+
+Built-in support for:
+- ✅ **English (EN)**
+- ✅ **Arabic (AR)** with full RTL support
+
+**203+ translation keys** covering all DevTools features.
+
+To add your own language, extend the localization files in `assets/lang/`.
+
+---
+
+## 🎨 Theme Customization
+
+### Preset Themes
+
+```dart
+DevToolsTheme.material()  // Blue (Material Design)
+DevToolsTheme.green()     // Green
+DevToolsTheme.orange()    // Orange
+DevToolsTheme.purple()    // Purple
+DevToolsTheme.red()       // Red
+DevToolsTheme.teal()      // Teal
+DevToolsTheme.dark()      // Dark mode
+```
+
+### Auto-Generate from App Color
+
+```dart
+// Automatically creates a harmonious theme
+config.setTheme(DevToolsTheme.fromAppColor(
+  Theme.of(context).primaryColor,
 ));
 ```
 
-## Localization
+### Fully Custom Theme
 
-Dev tools supports:
-- ✅ English (EN)
-- ✅ Arabic (AR) with RTL support
-
-203+ translation keys included.
-
-## Package Structure
-
-```
-dev_tools/
-├── dev_tools_config.dart          # Configuration & env management
-├── dev_tools_theme.dart            # Theme customization
-├── dev_tools_wrapper.dart          # Main wrapper widget
-├── performance_monitor.dart        # CPU/RAM/FPS tracking
-├── network_logger.dart             # HTTP logging
-├── exception_logger.dart           # Error tracking
-├── ui_event_logger.dart            # UI interaction logging
-├── firebase_debug_service.dart     # Firebase testing
-└── widgets/
-    ├── dev_tools_overlay.dart      # Main overlay UI
-    ├── dev_toast.dart              # Custom toast widget
-    └── dev_tools_fab.dart          # Floating action button
+```dart
+config.setTheme(DevToolsTheme(
+  primaryColor: Color(0xFF1E88E5),
+  secondaryColor: Color(0xFF64B5F6),
+  successColor: Color(0xFF43A047),
+  warningColor: Color(0xFFFB8C00),
+  errorColor: Color(0xFFE53935),
+  backgroundColor: Color(0xFFFAFAFA),
+  textColor: Color(0xFF212121),
+  cardColor: Colors.white,
+  borderRadius: 12.0,
+  elevation: 4.0,
+));
 ```
 
-## Dependencies
+---
+
+## 🏗️ Package Structure
+
+```
+flutter_advanced_devtools/
+├── lib/
+│   ├── flutter_advanced_devtools.dart      # Main export file
+│   ├── dev_tools_config.dart                # Configuration & state
+│   ├── dev_tools_theme.dart                 # Theme system
+│   ├── dev_tools_preferences.dart           # Persistent storage
+│   ├── dev_tools_service.dart               # Core service
+│   ├── network_logger.dart                  # HTTP interceptor 🔥
+│   ├── exception_logger.dart                # Error tracking
+│   ├── ui_event_logger.dart                 # UI event tracking
+│   ├── performance_monitor.dart             # Performance metrics
+│   ├── firebase_debug_service.dart          # FCM debugging
+│   └── widgets/
+│       ├── dev_tools_wrapper.dart           # Root wrapper
+│       ├── dev_tools_overlay.dart           # Main UI
+│       ├── dev_tools_fab.dart               # Floating button
+│       └── dev_toast.dart                   # Custom toasts
+├── assets/
+│   └── lang/
+│       ├── en.json                          # English translations
+│       └── ar.json                          # Arabic translations
+└── example/                                 # Example app
+```
+
+---
+
+## 📚 Examples
+
+Check out the [`/example`](example/) folder for complete examples:
+
+- ✅ **Basic Setup** - Minimal integration
+- ✅ **Dio Integration** - Full network logging
+- ✅ **Custom Theming** - Theme customization
+- ✅ **Environment Switching** - Multi-environment setup
+- ✅ **Advanced Configuration** - All features enabled
+
+---
+
+## 🔧 Dependencies
 
 ```yaml
 dependencies:
   flutter:
     sdk: flutter
-  device_info_plus: ^9.0.0
-  package_info_plus: ^4.0.0
-  permission_handler: ^11.0.0
-  firebase_messaging: ^14.0.0
-  flutter_local_notifications: ^16.0.0
-  sensors_plus: ^4.0.0
-  share_plus: ^7.0.0
+  dio: ^5.0.0                               # For network interceptor
+  device_info_plus: ^9.0.0                  # Device information
+  package_info_plus: ^4.0.0                 # App version info
+  permission_handler: ^11.0.0               # Permissions
+  firebase_messaging: ^14.0.0               # FCM support
+  flutter_local_notifications: ^16.0.0      # Local notifications
+  sensors_plus: ^4.0.0                      # Shake detection
+  share_plus: ^7.0.0                        # Share logs
+  shared_preferences: ^2.0.0                # Persistent storage
 ```
-
-## Examples
-
-See the `/examples` folder for more detailed examples:
-- Basic setup
-- Custom theming
-- Advanced configuration
-- Custom loggers
-
-## License
-
-MIT License - Free to use in your projects!
-
-## Contributing
-
-Contributions welcome! Please feel free to submit a Pull Request.
-
-## Author
-
-Created for FittPub mobile app - Made with ❤️ by the FittPub team
 
 ---
 
-**Note**: This package is production-ready and actively maintained. It's used in the FittPub mobile app serving thousands of users.
+## 🤝 Contributing
+
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🙏 Acknowledgments
+
+- Inspired by modern developer tools and debugging practices
+- Built with ❤️ for the Flutter community
+- Special thanks to all contributors
+
+---
+
+## 📞 Support
+
+- 📧 Email: support@example.com
+- 🐛 Issues: [GitHub Issues](https://github.com/yourusername/flutter_advanced_devtools/issues)
+- 💬 Discussions: [GitHub Discussions](https://github.com/yourusername/flutter_advanced_devtools/discussions)
+
+---
+
+## 🌟 Show Your Support
+
+If this package helped you, please give it a ⭐️ on GitHub!
+
+---
+
+<p align="center">Made with ❤️ for Flutter developers worldwide</p>
