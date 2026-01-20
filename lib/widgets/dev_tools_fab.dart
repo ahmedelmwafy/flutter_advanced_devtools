@@ -162,7 +162,10 @@ class _DevToolsFabState extends State<DevToolsFab> {
                 borderRadius: BorderRadius.circular(_isDragging ? 16 : 12),
                 boxShadow: [
                   BoxShadow(
-                    color: DevToolsConfig().theme.primaryColor.withOpacity(0.4),
+                    color: DevToolsConfig()
+                        .theme
+                        .primaryColor
+                        .withValues(alpha: 0.4),
                     blurRadius: _isDragging ? 12 : 8,
                     spreadRadius: _isDragging ? 2 : 0,
                   ),
@@ -210,7 +213,7 @@ class DevToolsButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
-              color: DevToolsConfig().theme.primaryColor.withOpacity(0.3),
+              color: DevToolsConfig().theme.primaryColor.withValues(alpha: 0.3),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),

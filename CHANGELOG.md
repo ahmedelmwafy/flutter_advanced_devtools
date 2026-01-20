@@ -1,3 +1,12 @@
+## 1.0.6
+* **Fixed all deprecated API warnings** for Flutter compatibility.
+* Replaced deprecated `withOpacity()` with `withValues(alpha:)` (4 occurrences).
+* Replaced deprecated `Share.share()` with `SharePlus.instance.share()` (2 occurrences).
+* Added missing exports for `UIEventLogger` and `DevToast` in main library.
+* Fixed example app compilation errors and API usage.
+* Added comprehensive example demonstrating all features.
+* **Zero warnings, zero errors** - fully compatible with latest Flutter/Dart.
+
 ## 1.0.5
 * **Added 6 professional screenshots** showcasing all major features.
 * Added comprehensive documentation for pub.dev publication.

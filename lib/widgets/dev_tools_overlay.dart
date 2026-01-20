@@ -198,7 +198,7 @@ class _DevToolsOverlayState extends State<DevToolsOverlay> {
                     borderRadius: BorderRadius.circular(24),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.2),
+                        color: Colors.black.withValues(alpha: 0.2),
                         blurRadius: 20,
                         offset: const Offset(0, 10),
                       ),
@@ -236,7 +236,7 @@ class _DevToolsOverlayState extends State<DevToolsOverlay> {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.2),
+              color: Colors.white.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(10),
             ),
             child: const Icon(
@@ -468,9 +468,8 @@ class _DevToolsOverlayState extends State<DevToolsOverlay> {
                     const SizedBox(width: 8),
                     Expanded(
                       child: OutlinedButton.icon(
-                        onPressed: () => Share.share(
-                          userToken,
-                          subject: 'dev_tools_access_token'.tr(),
+                        onPressed: () => SharePlus.instance.share(
+                          ShareParams(text: userToken),
                         ),
                         icon: const Icon(Icons.share, size: 16),
                         label: Text('dev_tools_share'.tr()),
@@ -595,10 +594,8 @@ class _DevToolsOverlayState extends State<DevToolsOverlay> {
                     const SizedBox(width: 8),
                     Expanded(
                       child: OutlinedButton.icon(
-                        onPressed: () => Share.share(
-                          _fcmToken!,
-                          subject:
-                              '${'dev_tools_fcm_token'.tr()} - ${_packageInfo?.appName ?? 'App Name'}',
+                        onPressed: () => SharePlus.instance.share(
+                          ShareParams(text: _fcmToken!),
                         ),
                         icon: const Icon(Icons.share, size: 16),
                         label: Text('dev_tools_share'.tr()),
