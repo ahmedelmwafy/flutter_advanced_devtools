@@ -144,12 +144,20 @@ class DevToolsConfig {
   bool get isDevToolsEnabled => !isRelease;
 
   /// Initialize configuration from stored preferences
+  ///
+  /// [onReinitializeDio] - Optional callback to reinitialize Dio when environment changes
+  /// [environments] - Optional list of custom environments to use instead of defaults
+  /// [customEnvironments] - Deprecated: Use [environments] instead
   Future<void> init({
     Future<void> Function()? onReinitializeDio,
+    List<Environment>? environments,
+    @Deprecated('Use environments parameter instead')
     List<Environment>? customEnvironments,
   }) async {
-    if (customEnvironments != null && customEnvironments.isNotEmpty) {
-      _environments = customEnvironments;
+    // Support both parameters for backward compatibility
+    final envList = environments ?? customEnvironments;
+    if (envList != null && envList.isNotEmpty) {
+      _environments = envList;
     }
     if (onReinitializeDio != null) {
       this.onReinitializeDio = onReinitializeDio;

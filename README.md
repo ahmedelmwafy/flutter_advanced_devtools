@@ -73,7 +73,7 @@ void main() async {
   
   // Initialize DevTools with your custom environments
   await DevToolsConfig().init(
-    customEnvironments: [
+    environments: [
       const Environment(
         name: 'Development',
         baseUrl: 'https://api.dev.yourapp.com/',
@@ -194,7 +194,7 @@ void main() async {
   // Initialize DevTools with reinitialize callback
   await DevToolsConfig().init(
     onReinitializeDio: DioHelper.reinitialize, // Called when settings change
-    customEnvironments: [
+    environments: [
       // Your environments...
     ],
   );
@@ -280,7 +280,7 @@ Switch between environments in real-time without rebuilding:
 ```dart
 // Define environments during initialization
 await DevToolsConfig().init(
-  customEnvironments: [
+  environments: [
     Environment(
       name: 'Local',
       baseUrl: 'http://localhost:3000/',

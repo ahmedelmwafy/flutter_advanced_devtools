@@ -105,7 +105,7 @@ class DioHelper {
 ### DevTools Initialization:
 ```dart
 await DevToolsConfig().init(
-  customEnvironments: [
+  environments: [
     const Environment(
       name: 'Development',
       baseUrl: 'https://jsonplaceholder.typicode.com/',

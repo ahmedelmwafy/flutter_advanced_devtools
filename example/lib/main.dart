@@ -7,7 +7,7 @@ void main() async {
 
   // Initialize DevTools with custom environments
   await DevToolsConfig().init(
-    customEnvironments: [
+    environments: [
       const Environment(
         name: 'Development',
         baseUrl: 'https://jsonplaceholder.typicode.com/',
@@ -34,12 +34,14 @@ class DioHelper {
   static late Dio dio;
 
   static void init() {
-    dio = Dio(BaseOptions(
-      baseUrl: DevToolsConfig().currentBaseUrl,
-      connectTimeout: const Duration(seconds: 30),
-      receiveTimeout: const Duration(seconds: 30),
-      receiveDataWhenStatusError: true,
-    ));
+    dio = Dio(
+      BaseOptions(
+        baseUrl: DevToolsConfig().currentBaseUrl,
+        connectTimeout: const Duration(seconds: 30),
+        receiveTimeout: const Duration(seconds: 30),
+        receiveDataWhenStatusError: true,
+      ),
+    );
 
     // Add NetworkLoggerInterceptor to capture all network activity
     if (DevToolsConfig().isDioLoggerEnabled) {
@@ -132,7 +134,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
       if (mounted) {
         DevToast.error(
-            context, 'API call failed! Check Network tab for details.');
+          context,
+          'API call failed! Check Network tab for details.',
+        );
       }
 
       // Log exception
@@ -230,8 +234,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: [
                     const Text(
                       'Counter Demo',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 8),
                     const Text('Each increment logs a UI event'),
@@ -261,17 +267,17 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: [
                     const Text(
                       'Network Logger Demo',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 8),
                     const Text(
-                        'All requests are logged in DevTools Network tab'),
-                    const SizedBox(height: 16),
-                    Text(
-                      _apiResponse,
-                      style: const TextStyle(fontSize: 14),
+                      'All requests are logged in DevTools Network tab',
                     ),
+                    const SizedBox(height: 16),
+                    Text(_apiResponse, style: const TextStyle(fontSize: 14)),
                     const SizedBox(height: 16),
                     Wrap(
                       spacing: 8,
@@ -283,8 +289,9 @@ class _MyHomePageState extends State<MyHomePage> {
                               ? const SizedBox(
                                   width: 16,
                                   height: 16,
-                                  child:
-                                      CircularProgressIndicator(strokeWidth: 2),
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                  ),
                                 )
                               : const Icon(Icons.cloud_download),
                           label: const Text('Single API Call'),
@@ -311,8 +318,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: [
                     const Text(
                       'Exception Logger Demo',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 8),
                     const Text('Trigger an error to see exception logging'),
@@ -342,8 +351,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: [
                     Row(
                       children: [
-                        Icon(Icons.lightbulb_outline,
-                            color: Colors.blue.shade700),
+                        Icon(
+                          Icons.lightbulb_outline,
+                          color: Colors.blue.shade700,
+                        ),
                         const SizedBox(width: 8),
                         Text(
                           'How to Open DevTools',

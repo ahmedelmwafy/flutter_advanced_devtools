@@ -1,3 +1,11 @@
+## 1.0.7
+* **Improved API for custom environments initialization**
+  * Added `environments` parameter to `init()` method for better developer experience
+  * Deprecated `customEnvironments` parameter (use `environments` instead)
+  * Developers can now pass custom environments more intuitively
+  * Example: `DevToolsConfig().init(environments: [...], onReinitializeDio: ...)`
+* Enhanced documentation with clearer parameter descriptions
+
 ## 1.0.6
 * **Fixed all deprecated API warnings** for Flutter compatibility.
 * Replaced deprecated `withOpacity()` with `withValues(alpha:)` (4 occurrences).
