@@ -2034,7 +2034,11 @@ Build: ${_packageInfo?.buildNumber ?? 'N/A'}
               title: Text('dev_tools_copy_response'.tr()),
               onTap: () {
                 Clipboard.setData(
-                  ClipboardData(text: entry.responseBody ?? ''),
+                  ClipboardData(
+                    text: entry.responseBody != null
+                        ? entry.formattedResponseBody
+                        : '',
+                  ),
                 );
                 Navigator.pop(context);
                 _showToast('dev_tools_copied'.tr());
@@ -2647,8 +2651,16 @@ class _RequestDetailSheet extends StatelessWidget {
                     child: TabBarView(
                       children: [
                         _buildInfoTab(),
-                        _buildBodyTab(entry.requestBody),
-                        _buildBodyTab(entry.responseBody),
+                        _buildBodyTab(
+                          entry.requestBody != null
+                              ? entry.formattedRequestBody
+                              : null,
+                        ),
+                        _buildBodyTab(
+                          entry.responseBody != null
+                              ? entry.formattedResponseBody
+                              : null,
+                        ),
                       ],
                     ),
                   ),

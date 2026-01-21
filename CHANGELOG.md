@@ -1,3 +1,8 @@
+## 1.0.9
+* **Bug Fix**: Resolved `type '_Map<String, dynamic>' is not a subtype of type 'String?'` crash in Network Logger.
+* **Bug Fix**: Fixed crash when viewing details of JSON network requests/responses.
+* **Bug Fix**: Fixed crash when copying JSON response body to clipboard.
+
 ## 1.0.8
 * **Critical Bug Fix**: Resolved "Navigator operation requested with a context that does not include a Navigator" crash.
 * Fixed navigation context issues in Network Logger and UI Event Logger tabs properly.
