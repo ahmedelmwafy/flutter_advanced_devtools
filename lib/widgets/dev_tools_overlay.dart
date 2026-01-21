@@ -1310,7 +1310,7 @@ Build: ${_packageInfo?.buildNumber ?? 'N/A'}
                   separatorBuilder: (_, __) => const Divider(height: 1),
                   itemBuilder: (context, index) {
                     final event = events[index];
-                    return _buildUIEventTile(event);
+                    return _buildUIEventTile(context, event);
                   },
                 ),
         ),
@@ -1318,7 +1318,7 @@ Build: ${_packageInfo?.buildNumber ?? 'N/A'}
     );
   }
 
-  Widget _buildUIEventTile(UIEvent event) {
+  Widget _buildUIEventTile(BuildContext context, UIEvent event) {
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 0),
       leading: Container(
@@ -1387,7 +1387,7 @@ Build: ${_packageInfo?.buildNumber ?? 'N/A'}
         },
         tooltip: 'dev_tools_copy'.tr(),
       ),
-      onTap: () => _showUIEventDetails(event),
+      onTap: () => _showUIEventDetails(context, event),
     );
   }
 
@@ -1425,7 +1425,7 @@ Build: ${_packageInfo?.buildNumber ?? 'N/A'}
     }
   }
 
-  void _showUIEventDetails(UIEvent event) {
+  void _showUIEventDetails(BuildContext context, UIEvent event) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -1898,7 +1898,8 @@ Build: ${_packageInfo?.buildNumber ?? 'N/A'}
               : ListView.builder(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   itemCount: entries.length,
-                  itemBuilder: (_, i) => _buildRequestItem(entries[i]),
+                  itemBuilder: (context, i) =>
+                      _buildRequestItem(context, entries[i]),
                 ),
         ),
       ],
@@ -1925,7 +1926,7 @@ Build: ${_packageInfo?.buildNumber ?? 'N/A'}
     );
   }
 
-  Widget _buildRequestItem(NetworkLogEntry entry) {
+  Widget _buildRequestItem(BuildContext context, NetworkLogEntry entry) {
     final statusColor = entry.hasError || entry.isServerError
         ? Colors.red
         : entry.isClientError
@@ -1933,8 +1934,8 @@ Build: ${_packageInfo?.buildNumber ?? 'N/A'}
             : Colors.green;
 
     return GestureDetector(
-      onTap: () => _showRequestDetails(entry),
-      onLongPress: () => _showRequestActions(entry),
+      onTap: () => _showRequestDetails(context, entry),
+      onLongPress: () => _showRequestActions(context, entry),
       child: Container(
         margin: const EdgeInsets.only(bottom: 8),
         padding: const EdgeInsets.all(12),
@@ -1988,7 +1989,7 @@ Build: ${_packageInfo?.buildNumber ?? 'N/A'}
     );
   }
 
-  void _showRequestDetails(NetworkLogEntry entry) {
+  void _showRequestDetails(BuildContext context, NetworkLogEntry entry) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -1997,7 +1998,7 @@ Build: ${_packageInfo?.buildNumber ?? 'N/A'}
     );
   }
 
-  void _showRequestActions(NetworkLogEntry entry) {
+  void _showRequestActions(BuildContext context, NetworkLogEntry entry) {
     HapticFeedback.mediumImpact();
     showModalBottomSheet(
       context: context,

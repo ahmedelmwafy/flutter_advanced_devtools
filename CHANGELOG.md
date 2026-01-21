@@ -1,3 +1,8 @@
+## 1.0.8
+* **Critical Bug Fix**: Resolved "Navigator operation requested with a context that does not include a Navigator" crash.
+* Fixed navigation context issues in Network Logger and UI Event Logger tabs properly.
+* Ensure all bottom sheets and dialogs in DevToolsOverlay use the correct Navigator context.
+
 ## 1.0.7
 * **Improved API for custom environments initialization**
   * Added `environments` parameter to `init()` method for better developer experience
